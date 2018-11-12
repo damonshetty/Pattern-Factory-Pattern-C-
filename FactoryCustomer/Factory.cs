@@ -4,25 +4,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BusinessLayer;
+using Unity;
 
 namespace FactoryCustomer
 {   
     //Design Pattern - Factory Pattern
     public static class Factory
     {
-        private static Dictionary<string, CustomerBase> custs = new Dictionary<string, CustomerBase>();
+        private static IUnityContainer custs = null;
 
         public static CustomerBase Create(string TypeCust)
         {
             //Design Pattern - Lazy Loading
-            if(custs.Count == 0)
+            if(custs == null)
             {
-                custs.Add("Customer", new Customer());
-                custs.Add("Lead", new Lead());
+                custs = new Unity.UnityContainer();
+                custs.RegisterType<CustomerBase, Customer>("Customer");
+                custs.RegisterType<CustomerBase, Lead>("Lead");
             }
 
             //Design Pattern - Replace If with Polymorphism
-            return custs[TypeCust];
+            return custs.Resolve<CustomerBase>(TypeCust);
         }
 
     }
