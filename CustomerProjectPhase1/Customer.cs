@@ -17,7 +17,6 @@ namespace BusinessLayer
         {
             throw new Exception("Not implemented");
         }
-
     }
 
     public class Customer: CustomerBase
@@ -44,7 +43,6 @@ namespace BusinessLayer
             {
                 throw new Exception("Address is required");
             }
-            
         }
     }
 
@@ -61,6 +59,5 @@ namespace BusinessLayer
                 throw new Exception("Phone number is required");
             }
         }
-
     }
 }
